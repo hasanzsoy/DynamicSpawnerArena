@@ -4,16 +4,24 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform player;
 
+    public Vector3 offset = new Vector3(0, 3, -6);
+    public float smoothSpeed = 5f;
+
     void LateUpdate()
     {
-        Vector3 targetPos = player.position + new Vector3(0, 10, -8);
+        if (player == null) return;
 
+        // Player'ın arkasını baz al
+        Vector3 desiredPosition = player.position + player.TransformDirection(offset);
+
+        // Yumuşak takip
         transform.position = Vector3.Lerp(
             transform.position,
-            targetPos,
-            5f * Time.deltaTime
+            desiredPosition,
+            smoothSpeed * Time.deltaTime
         );
 
+        // Player'a bak
         transform.LookAt(player);
     }
 }
