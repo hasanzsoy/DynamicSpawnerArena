@@ -2,26 +2,19 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player;
 
-    public Vector3 offset = new Vector3(0, 3, -6);
-    public float smoothSpeed = 5f;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Vector3 offset;
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (player == null) return;
+        FollowPlayerPosition();
+    }
 
-        // Player'ın arkasını baz al
-        Vector3 desiredPosition = player.position + player.TransformDirection(offset);
-
-        // Yumuşak takip
-        transform.position = Vector3.Lerp(
-            transform.position,
-            desiredPosition,
-            smoothSpeed * Time.deltaTime
-        );
-
-        // Player'a bak
-        transform.LookAt(player);
+    private void FollowPlayerPosition()
+    {
+        Vector3 newPosition = transform.position = playerTransform.position + offset;
+        newPosition.x = 0;
+        transform.position = newPosition;
     }
 }
