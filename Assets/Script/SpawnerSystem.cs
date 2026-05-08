@@ -38,7 +38,7 @@ public class SpawnerSystem : MonoBehaviour
 
             yield return new WaitForSeconds(spawnTime);
 
-            // zamanla hızlansın
+           
             if (spawnTime > minSpawnTime)
             {
                 spawnTime -= 0.2f;
@@ -54,6 +54,7 @@ public class SpawnerSystem : MonoBehaviour
 
         currentEnemy++;
 
+        //prefabdeki yere koyduklarım
         enemy.GetComponent<Enemy>().player = player;
         enemy.GetComponent<Enemy>().spawner = this;
     }
@@ -65,7 +66,7 @@ public class SpawnerSystem : MonoBehaviour
 
         Vector3 pos = player.position + random;
 
-        // player'a çok yakın olmasın
+        
         if (Vector3.Distance(pos, player.position) < 3f)
         {
             return RandomPosition();
