@@ -15,19 +15,19 @@ public class Enemy : MonoBehaviour
 
         life += Time.deltaTime;
 
-        // player'a git
+        
         Vector3 dir = (player.position - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
 
         float dist = Vector3.Distance(transform.position, player.position);
 
-        // yakınsa yok ol
+       
         if (dist < 1.5f)
         {
             DestroyMe();
         }
 
-        // 6 saniye sonra yok ol
+       
         if (life > 6f)
         {
             DestroyMe();
